@@ -28,7 +28,7 @@ class ListUserAdapter(private val listUser: ArrayList<User>) :
             .into(holder.binding.imgItemAvatar) // imageView mana yang akan diterapkan
         holder.binding.tvItemName.text = name
         holder.binding.tvItemUsername.text = username
-        holder.binding.imgItemAvatar.setOnClickListener {
+        holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listUser[holder.adapterPosition])
         }
     }
