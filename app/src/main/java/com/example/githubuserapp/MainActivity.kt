@@ -3,8 +3,11 @@ package com.example.githubuserapp
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,13 +23,41 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         supportActionBar?.title = "Github User's"
 
         rvUser = findViewById(R.id.rv_user)
         rvUser.setHasFixedSize(true)
 
         list.addAll(listUser)
+
+        searchUsername()
         showRecyclerList()
+    }
+
+    private fun searchUsername() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (query.isEmpty()) {
+                    return true
+                } else {
+                    listUser.clear()
+                    getUserSearch(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun getUserSearch(id: String) {
+        Toast.makeText(this@MainActivity, id, Toast.LENGTH_SHORT).show()
     }
 
     private fun showSelectedHero(hero: User) {
@@ -77,5 +108,22 @@ class MainActivity : AppCompatActivity() {
                 showSelectedHero(data)
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.app_bar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_setting -> {
+                val settingActivityIntent = Intent(this, SettingActivity::class.java)
+                startActivity(settingActivityIntent)
+                return true
+            }
+            else -> true
+        }
     }
 }
