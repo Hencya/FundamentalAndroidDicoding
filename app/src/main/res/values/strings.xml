@@ -111,4 +111,6 @@
     <string name="This_setting_activity">Setting Menu</string>
     <string name="search">Search Username</string>
     <string name="search_hint">Masukkan Username</string>
+    <string name="tab_follower">Follower</string>
+    <string name="tab_following">Following</string>
 </resources>

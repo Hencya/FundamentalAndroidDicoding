@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHubUserApp">
         <activity
-            android:name=".SettingActivity"
+            android:name=".ui.activity.SettingActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailUserActivity"
+            android:name=".ui.activity.DetailUserActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

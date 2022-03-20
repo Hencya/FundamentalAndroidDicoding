@@ -1,9 +1,11 @@
-package com.example.githubuserapp
+package com.example.githubuserapp.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.githubuserapp.R
 import com.example.githubuserapp.databinding.ActivityDetailUserBinding
+import com.example.githubuserapp.model.User
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
@@ -28,7 +30,7 @@ class DetailUserActivity : AppCompatActivity() {
             tvUserUsername.text = StringBuilder("@").append(data?.username)
             tvUserFollower.text = StringBuilder("Follower : ").append(data?.follower)
             tvUserFollowing.text = StringBuilder("Following : ").append(data?.following)
-            tvUserRepository.text = StringBuilder("Sum Repository : ").append(data?.repository)
+            tvUserRepository.text = StringBuilder("Repository : ").append(data?.repository)
             tvUserLocation.text = StringBuilder("Location : ").append(data?.location)
             tvUserCompany.text = StringBuilder("Company : ").append(data?.company)
         }

@@ -3,22 +3,33 @@ package com.example.githubuserapp
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuserapp.databinding.ActivityMainBinding
+import com.example.githubuserapp.model.UserSearchItem
+import com.example.githubuserapp.ui.activity.DetailUserActivity
+import com.example.githubuserapp.ui.adapter.ListUserAdapter
+import com.example.githubuserapp.ui.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvUser: RecyclerView
-    private val list = ArrayList<User>()
 
     private lateinit var binding: ActivityMainBinding
+
+    private val mainViewModel by viewModels<MainViewModel>()
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +40,33 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Github User's"
 
-        rvUser = findViewById(R.id.rv_user)
-        rvUser.setHasFixedSize(true)
+        binding.rvUser.setHasFixedSize(true)
 
-        list.addAll(listUser)
+        mainViewModel.itemUser.observe(this) {
+            setUserData(it)
+        }
+
+//      SetupRecycleView
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvUser.layoutManager = layoutManager
+        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        binding.rvUser.addItemDecoration(itemDecoration)
+
+        mainViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        mainViewModel.snackBarText.observe(this) {
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Snackbar.make(
+                    findViewById(R.id.rv_user),
+                    snackBarText,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         searchUsername()
-        showRecyclerList()
     }
 
     private fun searchUsername() {
@@ -44,8 +75,14 @@ class MainActivity : AppCompatActivity() {
                 if (query.isEmpty()) {
                     return true
                 } else {
-                    listUser.clear()
-                    getUserSearch(query)
+                    mainViewModel.searchUser(query)
+                    binding.search.clearFocus()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Mencari Username " + query,
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                 }
                 return true
             }
@@ -56,74 +93,49 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getUserSearch(id: String) {
-        Toast.makeText(this@MainActivity, id, Toast.LENGTH_SHORT).show()
+    private fun showSelectedUser(user: UserSearchItem) {
+        Toast.makeText(this, "Kamu memilih " + user.login, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showSelectedHero(hero: User) {
-        Toast.makeText(this, "Kamu memilih " + hero.name, Toast.LENGTH_SHORT).show()
-    }
-
-    private val listUser: ArrayList<User>
-        get() {
-            val dataUsername = resources.getStringArray(R.array.data_username)
-            val dataName = resources.getStringArray(R.array.data_name)
-            val dataAvatar = resources.getStringArray(R.array.data_avatar)
-            val dataFollower = resources.getStringArray(R.array.data_follower)
-            val dataFollowing = resources.getStringArray(R.array.data_following)
-            val dataCompany = resources.getStringArray(R.array.data_company)
-            val dataLocation = resources.getStringArray(R.array.data_location)
-            val dataRepository = resources.getStringArray(R.array.data_repository)
-            val listUser = ArrayList<User>()
-            for (i in dataName.indices) {
-                val user = User(
-                    dataUsername[i],
-                    dataName[i],
-                    dataAvatar[i],
-                    dataFollower[i],
-                    dataFollowing[i],
-                    dataCompany[i],
-                    dataLocation[i],
-                    dataRepository[i]
-                )
-                listUser.add(user)
-            }
-            return listUser
-        }
-
-    private fun showRecyclerList() {
+    private fun setUserData(itemUser: List<UserSearchItem>) {
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rvUser.layoutManager = GridLayoutManager(this, 2)
+            binding.rvUser.layoutManager = GridLayoutManager(this, 2)
         } else {
-            rvUser.layoutManager = LinearLayoutManager(this)
+            binding.rvUser.layoutManager = LinearLayoutManager(this)
         }
-        val listHeroAdapter = ListUserAdapter(list)
-        rvUser.adapter = listHeroAdapter
 
-        listHeroAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: User) {
-                val intentToDetail = Intent(this@MainActivity, DetailUserActivity::class.java)
-                intentToDetail.putExtra("DATA", data)
-                startActivity(intentToDetail)
-                showSelectedHero(data)
-            }
-        })
+        val listUser = ArrayList<UserSearchItem>()
+
+        for (user in itemUser) {
+            val dataUser = UserSearchItem(
+                user.login,
+                user.avatarUrl,
+                user.type,
+            )
+            listUser.add(dataUser)
+        }
+
+        val adapter =
+            ListUserAdapter(listUser, object : ListUserAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: UserSearchItem) {
+                    val intentToDetail = Intent(this@MainActivity, DetailUserActivity::class.java)
+                    intentToDetail.putExtra("DATA", data)
+                    startActivity(intentToDetail)
+                    showSelectedUser(data)
+                }
+            })
+        binding.rvUser.adapter = adapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.app_bar_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_setting -> {
-                val settingActivityIntent = Intent(this, SettingActivity::class.java)
-                startActivity(settingActivityIntent)
-                return true
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+                rvUser.visibility = View.INVISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+                rvUser.visibility = View.VISIBLE
             }
-            else -> true
         }
     }
 }

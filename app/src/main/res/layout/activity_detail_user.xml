@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailUserActivity">
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    tools:context=".ui.activity.DetailUserActivity">
 
     <ImageView
         android:id="@+id/img_user_avatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/photo_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,7 +22,7 @@
 
     <TextView
         android:id="@+id/tv_user_name"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
@@ -33,7 +35,7 @@
 
     <TextView
         android:id="@+id/tv_user_username"
-        android:layout_width="100dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/username_user"
@@ -45,12 +47,13 @@
         android:id="@+id/tv_user_following"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
         android:gravity="center"
         android:text="@string/user_following"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_user_username"
-        app:layout_constraintHorizontal_bias="0.722"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_user_follower"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_username" />
 
@@ -61,7 +64,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/user_follower"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_user_username"
         app:layout_constraintStart_toStartOf="@+id/tv_user_username"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_username" />
@@ -70,40 +73,64 @@
         android:id="@+id/tv_user_repository"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
         android:gravity="center"
         android:text="@string/user_repository"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.29"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_username"
+        app:layout_constraintStart_toEndOf="@+id/tv_user_follower"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_username" />
 
     <TextView
         android:id="@+id/tv_user_location"
-        android:layout_width="100dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/user_location"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_user_follower"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_following"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_user_follower"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_follower"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_follower" />
 
     <TextView
         android:id="@+id/tv_user_company"
-        android:layout_width="99dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/user_company"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_user_repository"
-        app:layout_constraintHorizontal_bias="0.35"
-        app:layout_constraintStart_toEndOf="@+id/tv_user_follower"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user_follower" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_user_location"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_location" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp"
+        android:background="@color/background_search"
+        android:minHeight="?actionBarSize"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_company"
+        app:tabIndicatorColor="@color/color_secondary"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="fixed"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="@color/color_secondary"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="340dp"
+        android:background="@color/background_tab_item_color"
+        app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
