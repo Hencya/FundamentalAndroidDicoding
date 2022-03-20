@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHubUserApp">
         <activity
-            android:name=".ui.activity.SettingActivity"
+            android:name=".ui.setting.SettingActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.DetailUserActivity"
+            android:name=".ui.detailUser.DetailUserActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

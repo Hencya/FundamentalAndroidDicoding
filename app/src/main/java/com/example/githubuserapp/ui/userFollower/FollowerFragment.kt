@@ -1,4 +1,4 @@
-package com.example.githubuserapp.ui.fragment
+package com.example.githubuserapp.ui.userFollower
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +9,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuserapp.R
-import com.example.githubuserapp.databinding.FragmentFollowingBinding
+import com.example.githubuserapp.databinding.FragmentFollowerBinding
 import com.example.githubuserapp.model.UserSocialResponse
-import com.example.githubuserapp.ui.activity.DetailUserActivity
+import com.example.githubuserapp.ui.detailUser.DetailUserActivity
 import com.example.githubuserapp.ui.adapter.DetailUserAdapter
-import com.example.githubuserapp.ui.viewmodel.FollowingViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class FollowingFragment : Fragment() {
 
-    private var _binding: FragmentFollowingBinding? = null
-    private val followingViewModel: FollowingViewModel by activityViewModels()
+class FollowerFragment : Fragment() {
+
+    private var _binding: FragmentFollowerBinding? = null
+    private val followersViewModel: FollowerViewModel by activityViewModels()
 
     private val binding get() = _binding!!
 
@@ -28,8 +28,7 @@ class FollowingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFollowingBinding.inflate(inflater, container, false)
-
+        _binding = FragmentFollowerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,8 +38,8 @@ class FollowingFragment : Fragment() {
         val args = arguments
         val username = args?.getString(DetailUserActivity.USERNAME).toString()
 
-        followingViewModel.itemFollowing.observe(viewLifecycleOwner) {
-            setFollowing(it)
+        followersViewModel.itemFollowers.observe(viewLifecycleOwner) {
+            setFollowers(it)
         }
 
         val layoutManager = LinearLayoutManager(activity)
@@ -49,16 +48,16 @@ class FollowingFragment : Fragment() {
         val itemDecoration = DividerItemDecoration(activity, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
-        followingViewModel.isLoading.observe(viewLifecycleOwner) {
+        followersViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
 
-        followingViewModel.getUserFollowing(username)
+        followersViewModel.getUserFollowers(username)
 
-        followingViewModel.snackbarText.observe(viewLifecycleOwner) {
+        followersViewModel.snackbarText.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { snackBarText ->
                 Snackbar.make(
-                    requireActivity().findViewById(R.id.tv_user_following),
+                    requireActivity().findViewById(R.id.tv_user_follower),
                     snackBarText,
                     Snackbar.LENGTH_LONG
                 ).show()
@@ -66,7 +65,7 @@ class FollowingFragment : Fragment() {
         }
     }
 
-    private fun setFollowing(itemUser: List<UserSocialResponse>) {
+    private fun setFollowers(itemUser: List<UserSocialResponse>) {
         val listUser = ArrayList<UserSocialResponse>()
         for (user in itemUser) {
             val dataUser = UserSocialResponse(
@@ -77,8 +76,7 @@ class FollowingFragment : Fragment() {
             listUser.add(dataUser)
         }
 
-        val adapter =
-            DetailUserAdapter(listUser)
+        val adapter = DetailUserAdapter(listUser)
         binding.rvUser.adapter = adapter
     }
 

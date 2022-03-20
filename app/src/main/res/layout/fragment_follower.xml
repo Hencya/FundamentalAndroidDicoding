@@ -4,7 +4,7 @@
     android:id="@+id/Rl_follower"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.FollowerFragment">
+    tools:context=".ui.userFollower.FollowerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user"

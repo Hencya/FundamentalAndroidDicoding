@@ -1,4 +1,4 @@
-package com.example.githubuserapp
+package com.example.githubuserapp.ui.main
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -13,12 +13,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuserapp.R
 import com.example.githubuserapp.databinding.ActivityMainBinding
 import com.example.githubuserapp.model.UserSearchItem
-import com.example.githubuserapp.ui.activity.DetailUserActivity
-import com.example.githubuserapp.ui.activity.SettingActivity
+import com.example.githubuserapp.ui.detailUser.DetailUserActivity
+import com.example.githubuserapp.ui.setting.SettingActivity
 import com.example.githubuserapp.ui.adapter.ListUserAdapter
-import com.example.githubuserapp.ui.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {

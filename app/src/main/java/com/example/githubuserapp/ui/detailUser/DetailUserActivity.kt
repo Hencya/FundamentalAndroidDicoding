@@ -1,4 +1,4 @@
-package com.example.githubuserapp.ui.activity
+package com.example.githubuserapp.ui.detailUser
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,6 @@ import com.example.githubuserapp.R
 import com.example.githubuserapp.databinding.ActivityDetailUserBinding
 import com.example.githubuserapp.model.UserSearchItem
 import com.example.githubuserapp.ui.adapter.SectionsPagerAdapter
-import com.example.githubuserapp.ui.viewmodel.DetailUserViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
