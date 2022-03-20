@@ -37,7 +37,7 @@ class ListUserAdapter(
                 .into(binding.imgItemAvatar) // imageView mana yang akan diterapkan
             binding.tvItemName.text = user.login
             binding.tvItemUsername.text = user.type
-            binding.imgItemAvatar.setOnClickListener {
+            itemView.setOnClickListener {
                 listener.onItemClicked(user)
             }
         }

@@ -1,7 +1,8 @@
 package com.example.githubuserapp.network
 
-import com.example.githubuserapp.model.UserSearchResponse
 import com.example.githubuserapp.model.UserDetailResponseItem
+import com.example.githubuserapp.model.UserSearchResponse
+import com.example.githubuserapp.model.UserSocialResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -18,7 +19,7 @@ interface ApiService {
 
     @GET("users/{username}")
     @Headers("Authorization: token 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")
-    fun getDetailUser(
+    fun getUser(
         @Path("username")
         login: String
     ): Call<UserDetailResponseItem>
@@ -28,12 +29,12 @@ interface ApiService {
     fun getUserFollowers(
         @Path("username")
         login: String
-    ): Call<List<UserDetailResponseItem>>
+    ): Call<List<UserSocialResponse>>
 
     @GET("users/{username}/following")
     @Headers("Authorization: token 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")
     fun getUserFollowing(
         @Path("username")
         login: String
-    ): Call<List<UserDetailResponseItem>>
+    ): Call<List<UserSocialResponse>>
 }

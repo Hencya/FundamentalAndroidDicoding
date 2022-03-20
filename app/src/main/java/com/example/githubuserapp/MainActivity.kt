@@ -3,6 +3,8 @@ package com.example.githubuserapp
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,18 +13,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuserapp.databinding.ActivityMainBinding
 import com.example.githubuserapp.model.UserSearchItem
 import com.example.githubuserapp.ui.activity.DetailUserActivity
+import com.example.githubuserapp.ui.activity.SettingActivity
 import com.example.githubuserapp.ui.adapter.ListUserAdapter
 import com.example.githubuserapp.ui.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var rvUser: RecyclerView
-
     private lateinit var binding: ActivityMainBinding
 
     private val mainViewModel by viewModels<MainViewModel>()
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 //      SetupRecycleView
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
+
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
@@ -136,6 +136,23 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 rvUser.visibility = View.VISIBLE
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.app_bar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_setting -> {
+                val settingActivityIntent = Intent(this, SettingActivity::class.java)
+                startActivity(settingActivityIntent)
+                return true
+            }
+            else -> true
         }
     }
 }
