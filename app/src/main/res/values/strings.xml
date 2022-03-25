@@ -16,4 +16,6 @@
     <string name="search_hint">Masukkan Username</string>
     <string name="tab_follower">Follower</string>
     <string name="tab_following">Following</string>
+    <string name="main_title">Github Users</string>
+    <string name="detail_title">Detail User</string>
 </resources>

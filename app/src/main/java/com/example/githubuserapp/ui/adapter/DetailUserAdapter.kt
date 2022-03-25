@@ -1,5 +1,7 @@
 package com.example.githubuserapp.ui.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +26,9 @@ class DetailUserAdapter(
         fun onBind(user: UserSocialResponse) {
             Glide.with(binding.root.context)
                 .load(user.avatarUrl) // URL Gambar
+                .placeholder(ColorDrawable(Color.BLACK)) // placeholder
+                .error(ColorDrawable(Color.RED)) // while error
+                .fallback(ColorDrawable(Color.GRAY)) // while null
                 .circleCrop() // Mengubah image menjadi lingkaran
                 .into(binding.imgItemAvatar) // imageView mana yang akan diterapkan
             binding.tvItemName.text = user.login

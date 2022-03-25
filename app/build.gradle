@@ -13,6 +13,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "TOKEN", "\"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\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,7 +39,7 @@ android {
 
 dependencies {
 
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"

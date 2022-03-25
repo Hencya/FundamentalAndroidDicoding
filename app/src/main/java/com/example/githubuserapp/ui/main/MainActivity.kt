@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuserapp.R
 import com.example.githubuserapp.databinding.ActivityMainBinding
 import com.example.githubuserapp.model.UserSearchItem
+import com.example.githubuserapp.ui.adapter.ListUserAdapter
 import com.example.githubuserapp.ui.detailUser.DetailUserActivity
 import com.example.githubuserapp.ui.setting.SettingActivity
-import com.example.githubuserapp.ui.adapter.ListUserAdapter
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Github User's"
+        supportActionBar?.title = getString(R.string.main_title)
 
         binding.rvUser.setHasFixedSize(true)
 

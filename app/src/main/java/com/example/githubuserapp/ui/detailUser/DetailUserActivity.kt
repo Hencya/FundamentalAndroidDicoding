@@ -32,7 +32,7 @@ class DetailUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
 
-        supportActionBar?.title = "Detail User"
+        supportActionBar?.title =  getString(R.string.detail_title)
 
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)

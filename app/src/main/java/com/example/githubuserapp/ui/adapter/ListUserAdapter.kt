@@ -1,5 +1,7 @@
 package com.example.githubuserapp.ui.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +17,6 @@ class ListUserAdapter(
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    class ListViewHolder(var binding: ItemRowUserBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,6 +32,9 @@ class ListUserAdapter(
         fun onBind(user: UserSearchItem, listener: OnItemClickCallback) {
             Glide.with(binding.root.context)
                 .load(user.avatarUrl) // URL Gambar
+                .placeholder(ColorDrawable(Color.BLACK)) // placeholder
+                .error(ColorDrawable(Color.RED)) // while error
+                .fallback(ColorDrawable(Color.GRAY)) // while null
                 .circleCrop() // Mengubah image menjadi lingkaran
                 .into(binding.imgItemAvatar) // imageView mana yang akan diterapkan
             binding.tvItemName.text = user.login
