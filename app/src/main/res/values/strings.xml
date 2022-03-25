@@ -18,4 +18,9 @@
     <string name="tab_following">Following</string>
     <string name="main_title">Github Users</string>
     <string name="detail_title">Detail User</string>
+    <string name="setting_title">Settings</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="made_by">Made By : Faiz Rofi Hencya</string>
+    <string name="welcome">Welcome to Github</string>
+    <string name="logo_github">Logo Github</string>
 </resources>

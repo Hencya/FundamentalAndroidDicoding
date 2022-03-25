@@ -7,22 +7,13 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.githubuserapp.R
+import com.example.githubuserapp.data.remote.response.UserSearchItem
 import com.example.githubuserapp.databinding.ActivityDetailUserBinding
-import com.example.githubuserapp.model.UserSearchItem
 import com.example.githubuserapp.ui.adapter.SectionsPagerAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
-    companion object {
-        const val USERNAME = "user"
-
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_follower,
-            R.string.tab_following
-        )
-    }
 
     private val detailViewModel by viewModels<DetailUserViewModel>()
 
@@ -32,7 +23,8 @@ class DetailUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
 
-        supportActionBar?.title =  getString(R.string.detail_title)
+        supportActionBar?.title = getString(R.string.detail_title)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -103,4 +95,20 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
     }
+
+    companion object {
+        const val USERNAME = "user"
+
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_follower,
+            R.string.tab_following
+        )
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+
 }

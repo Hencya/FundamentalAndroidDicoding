@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubuserapp.data.remote.response.UserSearchItem
 import com.example.githubuserapp.databinding.ItemRowUserBinding
-import com.example.githubuserapp.model.UserSearchItem
 
 class ListUserAdapter(
     private val listUser: ArrayList<UserSearchItem>,

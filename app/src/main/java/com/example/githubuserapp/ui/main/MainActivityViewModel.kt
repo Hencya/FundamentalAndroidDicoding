@@ -4,21 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuserapp.model.UserSearchItem
-import com.example.githubuserapp.model.UserSearchResponse
-import com.example.githubuserapp.network.ApiConfig
+import com.example.githubuserapp.data.remote.response.UserSearchItem
+import com.example.githubuserapp.data.remote.response.UserSearchResponse
+import com.example.githubuserapp.data.remote.retrofit.ApiConfig
 import com.example.githubuserapp.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
-    companion object {
-        private const val TAG = "MainActivityViewModel"
-        private const val FAILED = "Connection Trouble"
-        private const val NOT_FOUND = "User Doesn't Exist"
-    }
-
+class MainViewModel() : ViewModel() {
     private val _itemUser = MutableLiveData<List<UserSearchItem>>()
     val itemUser: LiveData<List<UserSearchItem>> = _itemUser
 
@@ -63,5 +57,11 @@ class MainViewModel : ViewModel() {
                 }
             })
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivityViewModel"
+        private const val FAILED = "Connection Trouble"
+        private const val NOT_FOUND = "User Doesn't Exist"
     }
 }

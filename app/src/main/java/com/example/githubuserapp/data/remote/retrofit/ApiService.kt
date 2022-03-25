@@ -1,9 +1,9 @@
-package com.example.githubuserapp.network
+package com.example.githubuserapp.data.remote.retrofit
 
 import com.example.githubuserapp.BuildConfig
-import com.example.githubuserapp.model.UserDetailResponseItem
-import com.example.githubuserapp.model.UserSearchResponse
-import com.example.githubuserapp.model.UserSocialResponse
+import com.example.githubuserapp.data.remote.response.UserDetailResponseItem
+import com.example.githubuserapp.data.remote.response.UserSearchResponse
+import com.example.githubuserapp.data.remote.response.UserSocialResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

@@ -1,8 +1,13 @@
-package com.example.githubuserapp.ui.setting
+package com.example.githubuserapp.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.widget.CompoundButton
+import android.os.Handler
+import android.os.Looper
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
@@ -10,24 +15,22 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubuserapp.R
-import com.example.githubuserapp.databinding.ActivitySettingBinding
+import com.example.githubuserapp.ui.main.MainActivity
+import com.example.githubuserapp.ui.setting.SettingActivityViewModel
+import com.example.githubuserapp.ui.setting.SettingPreferences
+import com.example.githubuserapp.ui.setting.ViewModelFactory
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class SettingActivity() : AppCompatActivity() {
-
-    private lateinit var binding: ActivitySettingBinding
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        supportActionBar?.title = getString(R.string.setting_title)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        val timeToWait = 2500L
         val pref = SettingPreferences.getInstance(dataStore)
+
         val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingActivityViewModel::class.java
         )
@@ -37,21 +40,26 @@ class SettingActivity() : AppCompatActivity() {
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                binding.switchTheme.isChecked = true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                binding.switchTheme.isChecked = false
             }
         }
 
-        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            settingViewModel.saveThemeSetting(isChecked)
-        }
-    }
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
-    }
+        @Suppress("DEPRECATION")
+        this.window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
+        setContentView(R.layout.activity_splash)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, timeToWait)
+    }
 }

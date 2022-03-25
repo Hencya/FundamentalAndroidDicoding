@@ -4,19 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuserapp.model.UserSocialResponse
-import com.example.githubuserapp.network.ApiConfig
+import com.example.githubuserapp.data.remote.response.UserSocialResponse
+import com.example.githubuserapp.data.remote.retrofit.ApiConfig
 import com.example.githubuserapp.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FollowingViewModel : ViewModel() {
-
-    companion object {
-        private const val TAG = "FollowersViewModel"
-        private const val FAILED = "Connection Trouble"
-    }
 
     private val _itemFollowing = MutableLiveData<List<UserSocialResponse>>()
     val itemFollowing: LiveData<List<UserSocialResponse>> = _itemFollowing
@@ -54,5 +49,8 @@ class FollowingViewModel : ViewModel() {
         }
     }
 
-
+    companion object {
+        private const val TAG = "FollowersViewModel"
+        private const val FAILED = "Connection Trouble"
+    }
 }

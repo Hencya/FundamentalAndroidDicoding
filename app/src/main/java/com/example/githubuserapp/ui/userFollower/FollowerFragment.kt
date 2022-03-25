@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuserapp.R
 import com.example.githubuserapp.databinding.FragmentFollowerBinding
-import com.example.githubuserapp.model.UserSocialResponse
+import com.example.githubuserapp.data.remote.response.UserSocialResponse
 import com.example.githubuserapp.ui.detailUser.DetailUserActivity
 import com.example.githubuserapp.ui.adapter.DetailUserAdapter
 import com.google.android.material.snackbar.Snackbar

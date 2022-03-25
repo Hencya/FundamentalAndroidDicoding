@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuserapp.R
+import com.example.githubuserapp.data.remote.response.UserSearchItem
 import com.example.githubuserapp.databinding.ActivityMainBinding
-import com.example.githubuserapp.model.UserSearchItem
 import com.example.githubuserapp.ui.adapter.ListUserAdapter
 import com.example.githubuserapp.ui.detailUser.DetailUserActivity
 import com.example.githubuserapp.ui.setting.SettingActivity
@@ -26,19 +26,13 @@ class MainActivity : AppCompatActivity() {
 
     private val mainViewModel by viewModels<MainViewModel>()
 
-    companion object {
-        private const val TAG = "MainActivity"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.title = getString(R.string.main_title)
-
         binding.rvUser.setHasFixedSize(true)
 
         mainViewModel.itemUser.observe(this) {
@@ -48,7 +42,6 @@ class MainActivity : AppCompatActivity() {
 //      SetupRecycleView
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
-
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
 
@@ -124,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                     showSelectedUser(data)
                 }
             })
+
         binding.rvUser.adapter = adapter
     }
 
@@ -152,7 +146,11 @@ class MainActivity : AppCompatActivity() {
                 startActivity(settingActivityIntent)
                 return true
             }
-            else -> true
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
