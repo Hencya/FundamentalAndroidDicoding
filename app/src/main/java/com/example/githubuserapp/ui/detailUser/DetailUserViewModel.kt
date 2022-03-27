@@ -85,3 +85,4 @@ class DetailUserViewModel(application: Application) : AndroidViewModel(applicati
         private const val FAILED = "Connection Failed"
     }
 }
+

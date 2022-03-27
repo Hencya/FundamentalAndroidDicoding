@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
             ListUserAdapter(listUser, object : ListUserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: UserSearchItem) {
                     val intentToDetail = Intent(this@MainActivity, DetailUserActivity::class.java)
-                    intentToDetail.putExtra("DATA", data)
+                    intentToDetail.putExtra(MainActivity.DATA, data)
                     startActivity(intentToDetail)
                     showSelectedUser(data)
                 }
@@ -158,5 +158,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
+        const val DATA = "data_user"
     }
 }

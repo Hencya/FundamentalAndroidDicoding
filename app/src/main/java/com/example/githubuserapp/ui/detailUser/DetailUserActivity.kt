@@ -56,13 +56,13 @@ class DetailUserActivity : AppCompatActivity() {
         lateinit var avatarURL: String
         lateinit var userType: String
 
-        if (intent.getParcelableExtra<UserSearchItem>("DATA") != null) {
-            user = intent.getParcelableExtra<UserSearchItem>("DATA") as UserSearchItem
+        if (intent.getParcelableExtra<UserSearchItem>(DATA) != null) {
+            user = intent.getParcelableExtra<UserSearchItem>(DATA) as UserSearchItem
             username = user.login
             avatarURL = user.avatarUrl
             userType = user.type
         } else {
-            userFav = intent.getParcelableExtra(EXTRA_FAVORITE)!!
+            userFav = intent.getParcelableExtra(DATA_FAV)!!
             avatarURL = userFav.avatar_url
             username = userFav.login
             userType = userFav.type
@@ -215,7 +215,8 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object {
         const val USERNAME = "user"
-        const val EXTRA_FAVORITE = "favorite"
+        const val DATA_FAV = "favorite"
+        const val DATA = "data_user"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
