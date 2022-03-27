@@ -1,4 +1,4 @@
-package com.example.githubuserapp.utils
+package com.example.githubuserapp.data
 
 sealed class Result<out R> private constructor() {
     data class Success<out T>(val data: T) : Result<T>()
