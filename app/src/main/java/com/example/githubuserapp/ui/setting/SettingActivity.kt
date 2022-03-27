@@ -28,7 +28,7 @@ class SettingActivity() : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val pref = SettingPreferences.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
             SettingActivityViewModel::class.java
         )
 

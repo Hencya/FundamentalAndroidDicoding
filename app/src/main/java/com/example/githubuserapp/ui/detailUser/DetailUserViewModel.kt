@@ -1,22 +1,24 @@
 package com.example.githubuserapp.ui.detailUser
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.githubuserapp.data.local.entity.UserFavEntity
+import com.example.githubuserapp.data.local.room.FavoriteDao
+import com.example.githubuserapp.data.local.room.FavoriteDatabase
 import com.example.githubuserapp.data.remote.response.UserDetailResponseItem
 import com.example.githubuserapp.data.remote.retrofit.ApiConfig
 import com.example.githubuserapp.utils.Event
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailUserViewModel : ViewModel() {
-    companion object {
-        private const val TAG = "DetailUserViewModel"
-        private const val FAILED = "Connection Failed"
-    }
-
+class DetailUserViewModel(application: Application) : AndroidViewModel(application) {
     private val _userDetail = MutableLiveData<UserDetailResponseItem>()
     val userDetail: LiveData<UserDetailResponseItem> = _userDetail
 
@@ -25,6 +27,9 @@ class DetailUserViewModel : ViewModel() {
 
     private val _snackbarText = MutableLiveData<Event<String>>()
     val snackBarText: LiveData<Event<String>> = _snackbarText
+
+    private var favDao: FavoriteDao? = null
+    private var favDb: FavoriteDatabase? = null
 
     fun setUserDetail(query: String) {
         if (query.isNotEmpty()) {
@@ -51,5 +56,32 @@ class DetailUserViewModel : ViewModel() {
                 }
             })
         }
+    }
+
+    init {
+        favDb = FavoriteDatabase.getInstance(application)
+        favDao = favDb?.favoriteDao()
+    }
+
+    fun insertToFavorite(userType: String, username: String, avatarURL: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val userIn = UserFavEntity(
+                userType, username, avatarURL
+            )
+            favDao?.insertFavoriteUser(userIn)
+        }
+    }
+
+    fun checkIsFavorited(username: String) = favDao?.isFavorite(username)
+
+    fun removeFromFavorite(username: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            favDao?.deleteFavoriteUser(username)
+        }
+    }
+
+    companion object {
+        private const val TAG = "DetailUserViewModel"
+        private const val FAILED = "Connection Failed"
     }
 }

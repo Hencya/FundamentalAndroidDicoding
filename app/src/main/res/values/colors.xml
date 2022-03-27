@@ -16,4 +16,5 @@
     <color name="background_tab_item_color">#1C2128</color>
     <color name="background_tab">#22272E</color>
     <color name="background_search">#4C8B51</color>
+    <color name="color_favorite">#FF598F</color>
 </resources>

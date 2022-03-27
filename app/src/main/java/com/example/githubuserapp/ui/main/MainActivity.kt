@@ -18,6 +18,7 @@ import com.example.githubuserapp.data.remote.response.UserSearchItem
 import com.example.githubuserapp.databinding.ActivityMainBinding
 import com.example.githubuserapp.ui.adapter.ListUserAdapter
 import com.example.githubuserapp.ui.detailUser.DetailUserActivity
+import com.example.githubuserapp.ui.favoriteUser.FavoriteActivity
 import com.example.githubuserapp.ui.setting.SettingActivity
 import com.google.android.material.snackbar.Snackbar
 
@@ -144,6 +145,11 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_setting -> {
                 val settingActivityIntent = Intent(this, SettingActivity::class.java)
                 startActivity(settingActivityIntent)
+                return true
+            }
+            R.id.menu_fav -> {
+                val favActivityIntent = Intent(this, FavoriteActivity::class.java)
+                startActivity(favActivityIntent)
                 return true
             }
             else -> super.onOptionsItemSelected(item)

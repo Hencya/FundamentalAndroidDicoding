@@ -23,4 +23,13 @@
     <string name="made_by">Made By : Faiz Rofi Hencya</string>
     <string name="welcome">Welcome to Github</string>
     <string name="logo_github">Logo Github</string>
+    <string name="menu_fav">Menu Favorite</string>
+    <string name="favorite">favorite</string>
+    <string name="favorite_user">Users Favorite</string>
+    <string name="add_favorite">Tambah Favorite</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="message_delete">Are you sure delete this user from favorite?</string>
+    <string name="deleted">User has been deleted from favorite</string>
+    <string name="delete">Delete</string>
 </resources>

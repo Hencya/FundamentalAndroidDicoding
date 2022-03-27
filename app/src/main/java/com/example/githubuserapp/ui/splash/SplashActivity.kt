@@ -18,7 +18,7 @@ import com.example.githubuserapp.R
 import com.example.githubuserapp.ui.main.MainActivity
 import com.example.githubuserapp.ui.setting.SettingActivityViewModel
 import com.example.githubuserapp.ui.setting.SettingPreferences
-import com.example.githubuserapp.ui.setting.ViewModelFactory
+import com.example.githubuserapp.ui.setting.SettingViewModelFactory
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         val timeToWait = 2500L
         val pref = SettingPreferences.getInstance(dataStore)
 
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(
             SettingActivityViewModel::class.java
         )
 

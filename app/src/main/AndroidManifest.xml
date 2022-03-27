@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHubUserApp">
-
+        <activity
+            android:name=".ui.favoriteUser.FavoriteActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.setting.SettingActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.detailUser.DetailUserActivity"
             android:exported="false" />
