@@ -13,9 +13,19 @@ import com.bumptech.glide.Glide
 import com.example.githubuserapp.data.local.entity.UserFavEntity
 import com.example.githubuserapp.databinding.ItemRowUserBinding
 import com.example.githubuserapp.ui.detailUser.DetailUserActivity
+import com.example.githubuserapp.utils.FavDiffCallback
 
-class FavoriteAdapter() :
-    ListAdapter<UserFavEntity, FavoriteAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.MyViewHolder>() {
+
+    private val listFav = ArrayList<UserFavEntity>()
+
+    fun setListFav(listFav: List<UserFavEntity>) {
+        val diffCallback = FavDiffCallback(this.listFav, listFav)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.listFav.clear()
+        this.listFav.addAll(listFav)
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,9 +33,7 @@ class FavoriteAdapter() :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val userFav = getItem(position)
-        holder.bind(userFav)
-
+        holder.bind(listFav[position])
     }
 
     class MyViewHolder(private val binding: ItemRowUserBinding) :
@@ -48,24 +56,8 @@ class FavoriteAdapter() :
         }
     }
 
-    companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<UserFavEntity> =
-            object : DiffUtil.ItemCallback<UserFavEntity>() {
-                override fun areItemsTheSame(
-                    oldUser: UserFavEntity,
-                    newUser: UserFavEntity
-                ): Boolean {
-                    return oldUser.login == newUser.login
-                }
-
-                @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(
-                    oldUser: UserFavEntity,
-                    newUser: UserFavEntity
-                ): Boolean {
-                    return oldUser == newUser
-                }
-            }
+    override fun getItemCount(): Int {
+        return listFav.size
     }
 }
 

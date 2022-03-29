@@ -23,6 +23,6 @@ class FavDiffCallback(
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldEmployee = mOldFavList[oldItemPosition]
         val newEmployee = mNewFavList[newItemPosition]
-        return oldEmployee.login == newEmployee.login && oldEmployee.type == newEmployee.type && oldEmployee.avatar_url == newEmployee.avatar_url
+        return oldEmployee.type == newEmployee.type && oldEmployee.avatar_url == newEmployee.avatar_url
     }
 }

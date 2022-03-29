@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_primary">#2D333B</color>
-    <color name="color_OnPrimary_light">#24292F</color>
-    <color name="color_primary_light">#FAFBFC</color>
-    <color name="color_primary_variant_light">#D1D5DA</color>
+    <color name="color_on_primary_light">#0D0D0D</color>
+    <color name="color_primary_light">#4352AF</color>
+    <color name="color_on_secondary_light">#0D0D0D</color>
+    <color name="color_primary_variant_light">#33419A</color>
+    <color name="color_secondary_light">#0DB0C4</color>
+    <color name="color_secondary_variant_light">#0DB0C4</color>
+    <color name="color_secondary_variant">#32423D</color>
     <color name="color_primary_variant">#272B33</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="color_secondary_variant">#32423D</color>
     <color name="color_secondary">#4C8B51</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -15,6 +18,6 @@
     <color name="background_color">#343B42</color>
     <color name="background_tab_item_color">#1C2128</color>
     <color name="background_tab">#22272E</color>
-    <color name="background_search">#4C8B51</color>
+    <color name="background_search">#0DB0C4</color>
     <color name="color_favorite">#FF598F</color>
 </resources>

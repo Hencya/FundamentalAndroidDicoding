@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+
     android:orientation="vertical"
     tools:context=".ui.detailUser.DetailUserActivity">
 
@@ -39,7 +39,6 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/name_user"
-        android:textColor="@color/text_color"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/img_user_avatar"
@@ -52,7 +51,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/username_user"
-        android:textColor="@color/text_color"
         app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
         app:layout_constraintStart_toStartOf="@+id/tv_user_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
@@ -66,7 +64,6 @@
         android:layout_marginEnd="48dp"
         android:gravity="center"
         android:text="@string/user_following"
-        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_user_follower"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +76,6 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/user_follower"
-        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_user_username"
         app:layout_constraintStart_toStartOf="@+id/tv_user_username"
@@ -94,7 +90,6 @@
         android:layout_marginEnd="56dp"
         android:gravity="center"
         android:text="@string/user_repository"
-        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_user_follower"
@@ -107,7 +102,6 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/user_location"
-        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_user_follower"
         app:layout_constraintStart_toStartOf="@+id/tv_user_follower"
@@ -120,7 +114,6 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/user_company"
-        android:textColor="@color/text_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_user_location"
         app:layout_constraintHorizontal_bias="1.0"
@@ -141,6 +134,7 @@
         app:tabIndicatorHeight="2dp"
         app:tabMode="fixed"
         app:tabRippleColor="@null"
+        android:theme="@style/CardView.Dark"
         app:tabSelectedTextColor="@color/color_secondary"
         app:tabTextColor="@color/text_color"
         tools:ignore="MissingConstraints" />

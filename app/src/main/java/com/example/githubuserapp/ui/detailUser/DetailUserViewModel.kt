@@ -72,13 +72,13 @@ class DetailUserViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun checkIsFavorited(username: String) = favDao?.isFavorite(username)
-
     fun removeFromFavorite(username: String) {
         CoroutineScope(Dispatchers.IO).launch {
             favDao?.deleteFavoriteUser(username)
         }
     }
+
+    fun checkIsFavorited(username: String) = favDao?.isFavorite(username)
 
     companion object {
         private const val TAG = "DetailUserViewModel"
